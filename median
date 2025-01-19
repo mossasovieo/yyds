@@ -1,0 +1,2 @@
+print(data['salary'].mean())  # 计算工资的平均值
+print(data['salary'].median())  # 计算工资的中位数
