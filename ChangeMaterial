@@ -1,0 +1,8 @@
+void AMyActor::ChangeMaterial()
+{
+    UMaterialInstance* NewMaterial = LoadObject<UMaterialInstance>(nullptr, TEXT("/Game/Materials/MyMaterialInstance"));
+    if (NewMaterial)
+    {
+        MeshComponent->SetMaterial(0, NewMaterial);
+    }
+}
