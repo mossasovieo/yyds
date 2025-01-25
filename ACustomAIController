@@ -1,0 +1,8 @@
+void ACustomAIController::FollowPatrolPath()
+{
+    if (PatrolPath && PatrolPath->Points.Num() > 0)
+    {
+        CurrentPatrolIndex = (CurrentPatrolIndex + 1) % PatrolPath->Points.Num();
+        MoveToLocation(PatrolPath->Points[CurrentPatrolIndex], 5.0f);
+    }
+}
