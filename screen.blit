@@ -1,0 +1,24 @@
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("背景滚动")
+
+background = pygame.image.load("background.png")
+bg_y = 0
+
+running = True
+while running:
+    screen.blit(background, (0, bg_y))
+    screen.blit(background, (0, bg_y - 600))
+    bg_y += 5
+    if bg_y >= 600:
+        bg_y = 0
+
+    pygame.display.update()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+pygame.quit()
