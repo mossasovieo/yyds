@@ -1,0 +1,10 @@
+def file_read_write(filename):
+    with open(filename, "w") as f:
+        f.write("Hello, 文件！\n这是一个测试内容。")
+    
+    with open(filename, "r") as f:
+        content = f.read()
+    print("文件内容：")
+    print(content)
+
+file_read_write("test.txt")
