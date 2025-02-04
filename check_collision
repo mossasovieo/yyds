@@ -1,0 +1,9 @@
+def check_collision(player_pos, enemy_pos, player_size, enemy_size):
+    p_x, p_y = player_pos
+    e_x, e_y = enemy_pos
+    return (e_x < p_x < e_x + enemy_size or e_x < p_x + player_size < e_x + enemy_size) and \
+           (e_y < p_y < e_y + enemy_size or e_y < p_y + player_size < e_y + enemy_size)
+
+if check_collision(player_pos, enemy_pos, player_size, enemy_size):
+    print("碰撞了！")
+    running = False
