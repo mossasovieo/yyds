@@ -1,0 +1,8 @@
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("database.db")
+query = "SELECT * FROM table_name"
+df = pd.read_sql_query(query, conn)
+df.to_excel("output.xlsx", index=False)
+print("数据已导出到 Excel！")
