@@ -1,0 +1,43 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
+    
+    def search(self, word):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end_of_word
+    
+    def starts_with(self, prefix):
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+
+# 测试示例
+if __name__ == "__main__":
+    trie = Trie()
+    words = ["apple", "app", "banana"]
+    for word in words:
+        trie.insert(word)
+    print("搜索 'apple':", trie.search("apple"))     # 输出：搜索 'apple': True
+    print("搜索 'app':", trie.search("app"))           # 输出：搜索 'app': True
+    print("是否有以 'ban' 开头的单词:", trie.starts_with("ban"))  # 输出：True
+    print("搜索 'appl':", trie.search("appl"))         # 输出：False
