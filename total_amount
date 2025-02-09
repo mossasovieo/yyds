@@ -1,0 +1,10 @@
+-- 表结构说明：
+-- orders: order_id, customer_id, amount, order_date
+-- customers: customer_id, name, city
+
+SELECT c.city, c.name, SUM(o.amount) AS total_amount
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.city, c.name
+HAVING SUM(o.amount) > 1000
+ORDER BY total_amount DESC;
