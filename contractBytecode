@@ -1,0 +1,27 @@
+// 示例：智能合约的 ABI 与 Bytecode（请替换为实际内容）
+const contractABI = [ /* 合约 ABI 数组 */ ];
+const contractBytecode = '0xYourContractBytecode';
+
+const deployContract = async () => {
+  const accounts = await web3.eth.getAccounts();
+  const deployer = accounts[0];
+
+  const contract = new web3.eth.Contract(contractABI);
+  contract.deploy({
+    data: contractBytecode,
+    arguments: [/* 构造函数参数列表 */]
+  })
+  .send({
+    from: deployer,
+    gas: 1500000,
+    gasPrice: '30000000000'
+  })
+  .on('receipt', receipt => {
+    console.log('合约部署成功，地址:', receipt.contractAddress);
+  })
+  .on('error', error => {
+    console.error('合约部署失败:', error);
+  });
+};
+
+deployContract();
