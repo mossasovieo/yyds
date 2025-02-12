@@ -1,0 +1,32 @@
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = OrderedDict()
+    
+    def get(self, key):
+        if key not in self.cache:
+            return -1
+        # 将 key 移至末尾，表示最近使用
+        self.cache.move_to_end(key)
+        return self.cache[key]
+    
+    def put(self, key, value):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) > self.capacity:
+            # 弹出最旧的项
+            self.cache.popitem(last=False)
+
+# 示例用法
+if __name__ == '__main__':
+    cache = LRUCache(3)
+    cache.put(1, 'A')
+    cache.put(2, 'B')
+    cache.put(3, 'C')
+    print("初始缓存：", cache.cache)
+    cache.get(1)
+    cache.put(4, 'D')
+    print("更新后缓存：", cache.cache)
