@@ -1,0 +1,17 @@
+import gym
+from stable_baselines3 import DQN
+
+# 创建环境
+env = gym.make("CartPole-v1")
+
+# 训练 DQN 模型
+model = DQN("MlpPolicy", env, verbose=1)
+model.learn(total_timesteps=10000)
+
+# 测试智能体
+obs = env.reset()
+done = False
+while not done:
+    action, _ = model.predict(obs)
+    obs, reward, done, _ = env.step(action)
+    env.render()
