@@ -1,0 +1,28 @@
+import random
+
+def divide(grid, x, y, w, h):
+    if w < 3 or h < 3: return
+    horizontal = random.choice([True, False])
+    wx = x + (0 if horizontal else random.randrange(2, w, 2))
+    wy = y + (random.randrange(2, h, 2) if horizontal else 0)
+    px = wx + (0 if horizontal else random.choice(range(1, w, 2)))
+    py = wy + (random.choice(range(1, h, 2)) if horizontal else 0)
+    dx, dy = (1, 0) if horizontal else (0, 1)
+    length = w if horizontal else h
+
+    for i in range(length):
+        if wx != px or wy != py:
+            grid[wy][wx] = '#'
+        wx += dx
+        wy += dy
+
+    if horizontal:
+        divide(grid, x, y, w, wy - y)
+        divide(grid, x, wy + 1, w, y + h - wy - 1)
+    else:
+        divide(grid, x, y, wx - x, h)
+        divide(grid, wx + 1, y, x + w - wx - 1, h)
+
+grid = [[' ' for _ in range(21)] for _ in range(21)]
+divide(grid, 0, 0, 21, 21)
+for row in grid: print("".join(row))
